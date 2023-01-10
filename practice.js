@@ -1,28 +1,20 @@
-const uncompress = (s) => {
-    let str = ''
-    let num = '';
-    for (let char of s) {
+function minStart(arr) {
 
-        //if it's a number, add it to number str
-        if (Number(char)) {
-            console.log(num, 'before')
-            num += char;
-            console.log(num, 'after')
-        } else {
-
-            //else, concat the character onto str
-            num = Number(num)
-            while (num > 0) {
-                str += char
-                num--
-            }
-
-
+    let x = 0;
+    let minVal = 0;
+    for (let num of arr) {
+        let nextNum = num + x
+        if (nextNum < 1) {
+            console.log(minVal, 'minVal')
+            minVal += nextNum * -1 + 1
+            console.log(nextNum, 'next num')
         }
-    }
-    return str;
+        x += num
 
+    }
+    console.log(x, 'x final')
+    return minVal;
 }
 
-
-console.log(uncompress("2c3a1t"));
+let arr =[10, -5, 4, -2, 3, 1, -1, -6, -1, 0, 5]
+console.log(minStart(arr))
