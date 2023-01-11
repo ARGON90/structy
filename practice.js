@@ -39,6 +39,7 @@ function getTotalExecutionTime(n, logs) {
 
     }
     return map;
+    
 }
 
 
