@@ -1,58 +1,34 @@
-class Node {
-  constructor(val) {
-    this.val = val;
-    this.next = null;
+
+
+
+const largestComponent = (graph) => {
+  let visited = new Set();
+  let max = 0;
+  for (let node in graph) {
+    const size = exploreSize(graph, node, visited);
+    max = Math.max(max, size)
   }
-}
-
-const a = new Node(5);
-const b = new Node(7);
-const c = new Node(10);
-const d = new Node(12);
-const e = new Node(20);
-const f = new Node(28);
-a.next = b;
-b.next = c;
-c.next = d;
-d.next = e;
-e.next = f;
-// 5 -> 7 -> 10 -> 12 -> 20 -> 28
-
-const q = new Node(6);
-const r = new Node(8);
-const s = new Node(9);
-const t = new Node(25);
-q.next = r;
-r.next = s;
-s.next = t;
-// 6 -> 8 -> 9 -> 25
-
-
-const mergeLists = (head1, head2) => {
-  let dummyHead = new Node(null);
-  let tail = dummyHead;
-  let current1 = head1;
-  let current2 = head2;
-
-  while (current1 && current2) {
-    console.log(current1, current2)
-    if (current1.val < current2.val) {
-      tail.next = current1;
-      current1 = current1.next;
-    } else {
-      tail.next = current2;
-      current2 = current2.next;
-    }
-    tail = tail.next
-  }
-
-  if (current1) {
-    tail.next = current1;
-  } else {
-    tail.next = current2;
-  }
-  return dummyHead.next;
+  return max;
 
 };
 
-mergeLists(a, q);
+function exploreSize(graph, node, visited) {
+  if (visited.has(node)) return 0;
+  visited.add(node)
+  let size = 1 //represents current node
+  for (let neighbor of graph[node]) {
+    size += exploreSize(graph, neighbor, visited); //should return a number
+  }
+  return size;
+}
+
+
+console.log(largestComponent({
+  0: ['8', '1', '5'],
+  1: ['0'],
+  5: ['0', '8'],
+  8: ['0', '5'],
+  2: ['3', '4'],
+  3: ['2', '4'],
+  4: ['3', '2']
+})); // -> 4
