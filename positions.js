@@ -1,34 +1,50 @@
-
-
-
-const largestComponent = (graph) => {
-  let visited = new Set();
-  let max = 0;
-  for (let node in graph) {
-    const size = exploreSize(graph, node, visited);
-    max = Math.max(max, size)
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
   }
-  return max;
+}
 
-};
+const a = new Node(2);
+const b = new Node(8);
+const c = new Node(3);
+const d = new Node(-1);
+const e = new Node(7);
 
-function exploreSize(graph, node, visited) {
-  if (visited.has(node)) return 0;
-  visited.add(node)
-  let size = 1 //represents current node
-  for (let neighbor of graph[node]) {
-    size += exploreSize(graph, neighbor, visited); //should return a number
-  }
-  return size;
+a.next = b;
+b.next = c;
+c.next = d;
+d.next = e;
+
+// 2 -> 8 -> 3 -> -1 -> 7
+
+// const sumList = (head) => {
+//   let sum = [0];
+//   addSum(sum, head);
+//   return sum;
+// }
+
+// const addSum = (sum, head) => {
+//   if (!head) return;
+//   sum += head.val
+//   console.log(sum)
+//   addSum(sum, head.next)
+// }
+
+const sumList = (head) => {
+  let sum = [0];
+  addSum(sum, head);
+  let total = 0;
+  sum.forEach((num) => total += num)
+  return total;
+}
+
+const addSum = (sum, head) => {
+  if (!head) return;
+  sum.push(head.val)
+  console.log(sum)
+  addSum(sum, head.next)
 }
 
 
-console.log(largestComponent({
-  0: ['8', '1', '5'],
-  1: ['0'],
-  5: ['0', '8'],
-  8: ['0', '5'],
-  2: ['3', '4'],
-  3: ['2', '4'],
-  4: ['3', '2']
-})); // -> 4
+console.log(sumList(a)); // 19
