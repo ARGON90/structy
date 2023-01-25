@@ -1,18 +1,22 @@
-let num = 5
+let nums = [-1, 0, 2, 3, 4, 5, 7, 8, 9, 10, 20]
 
-function sumNums(num) {
-  //base case
-  if (num === 0) return 0;
+function binarySearch(nums, x, left, right) {
+  let midPoint = Math.floor((left + right) / 2)
 
-  //recursive step
-  return sumNums(num - 1) + num
+  //base cases
+  if (left > right) return -1
+  if (nums[midPoint] === x) return midPoint
+
+  //recursive steps
+  if (nums[midPoint] > x) {
+    //if the current midpoint is BIGGER than the target
+    //keep left index the same, decrease right index to the midpoint - 1
+    return binarySearch(nums, x, left, midPoint - 1)
+  } else {
+    //if current midpoint is SMALLER than the target
+    //keep right index the same, increase left index to the midpoint + 1
+    return binarySearch(nums, x, midPoint + 1, right);
+  }
 
 }
-console.log(sumNums(num));
-
-// sumNums(0) return 0
-// sumNums(1 - 1) + 1  --> 0 + 1
-// sumNums(2 - 1) + 2  --> 1 + 2
-// sumNums(3 - 1) + 3  --> 3 + 3
-// sumNums(4 - 1) + 4  --> 6 + 4
-// sumNums(5 - 1) + 5  --> 10 + 5 ==> 15
+console.log(binarySearch(nums, 10, 0, nums.length - 1 ));
