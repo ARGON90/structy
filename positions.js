@@ -1,26 +1,45 @@
-let nums = [-1, 0, 2, 3, 4, 5, 7, 8, 9, 10, 20]
-
-function binarySearch(nums, x, left, right) {
-  let midPoint = Math.floor((left + right) / 2)
-
-  //base cases
-  if (left > right) return -1
-  if (nums[midPoint] === x) return midPoint
-
-  //recursive steps
-  if (nums[midPoint] > x) {
-    //if the current midpoint is BIGGER than the target
-    //keep left index the same, decrease right index to the midpoint - 1
-    return binarySearch(nums, x, left, midPoint - 1)
-  } else {
-    //if current midpoint is SMALLER than the target
-    //keep right index the same, increase left index to the midpoint + 1
-    return binarySearch(nums, x, midPoint + 1, right);
+// Merge Sort Implentation (Recursion)
+function mergeSort(unsortedArray) {
+  // No need to sort the array if the array only has one element or empty
+  if (unsortedArray.length <= 1) {
+    return unsortedArray;
   }
-}
-console.log(binarySearch(nums, 7, 0, nums.length - 1 ));
 
-// midpoint === target return index of 6
-// binarySearch(nums, 7, 6, 7) [7, 8] midpoint value is 7                                  --> 6
-// binarySearch(nums, 7, 6, 10) [7, 8, 9, 10, 20] midpoint value is 9                      --> 6
-// binarySearch(nums, 7, 0, 10,) [-1, 0, 2, 3, 4, 5, 7, 8, 9, 10, 20] midpoint values is 5 --> 6
+  // In order to divide the array in half, we need to figure out the middle
+  const middle = Math.floor(unsortedArray.length / 2);
+
+  // This is where we will be dividing the array into left and right
+  const left = unsortedArray.slice(0, middle);
+  const right = unsortedArray.slice(middle);
+
+  // Using recursion to combine the left and right
+  return merge(mergeSort(left), mergeSort(right));
+}
+
+// Merge the two arrays: left and right
+function merge(left, right) {
+  let resultArray = [], leftIndex = 0, rightIndex = 0;
+
+  // We will concatenate values into the resultArray in order
+  while (leftIndex < left.length && rightIndex < right.length) {
+    if (left[leftIndex] < right[rightIndex]) {
+      resultArray.push(left[leftIndex]);
+      leftIndex++; // move left array cursor
+    } else {
+      resultArray.push(right[rightIndex]);
+      rightIndex++; // move right array cursor
+    }
+  }
+
+  // We need to concat here because there will be one element remaining
+  // from either left OR the right
+  let res = resultArray
+    .concat(left.slice(leftIndex))
+    .concat(right.slice(rightIndex));
+    console.log(res)
+  return res;
+}
+
+const array = [10, -1, 2, 5, 0, 6, 4, -5]
+
+console.log('end', mergeSort(array))
