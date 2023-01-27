@@ -1,13 +1,25 @@
-const nonAdjacentSum = (nums, i = 0, memo={}) => {
-  if (i in memo) return memo[i];
-  //i is index of num you're making decision for
-  if (i >= nums.length) return 0;
-  //this means you're done looking at all numbers
+const summingSquares = (n, memo = {} ) => {
+  if (n in memo) return memo[n];
 
-  const includesFirstNum = nums[i] + nonAdjacentSum(nums, i + 2, memo);
-  const excludesFirstNum = nonAdjacentSum(nums, i + 1, memo);
+  if (n === 0) return 0;
 
-  memo[i] = Math.max(includesFirstNum, excludesFirstNum);
-  return memo[i];
+  let minSquares = Infinity;
+
+  //we take sqrt(n) because we know the square of that will sum
+  //to be the number itself, so we don't need to exceed that.
+  //Numbers large than sqrt(n) will be too large anyways.
+  for (let i = 1; i <= Math.sqrt(n); i ++) {
+    const square = i * i;
+    //for the recursive step, you need to count 1 for each successive subtraction
+    const numSquares = 1 + summingSquares(n - square)
+
+    //this will never return a negative number, so we don't need to worry about
+    //an extra guarding case or base case
+    //Since 1 is a perfect square, all branching paths will have an answer
+    //because you can subtract by 1 until you hit 0
+    minSquares = Math.min(minSquares, numSquares);
+  }
+
+
+  return minSquares;
 };
-
