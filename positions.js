@@ -1,32 +1,27 @@
-const nestingScore = (str) => {
-  let stack = [0];
+const subsets = (elements) => {
+  //base case - answer always includes empty subset
+  //answer will be an array of arrays, so it needs to be nested
+  if (elements.length === 0) return [[]];
 
-  for (let bracket of str) {
-    console.log(stack)
-    if (bracket === '[') {
-      stack.push(0)
-    } else {
-      let current = stack.pop();
-      //pop num off stack
-      //if it's 0, add a 1 to the stack
-      if (current === 0) {
-        stack[stack.length - 1] ++
-      } else {
-        // if it's a number, multiply that number by two and have that be the new stack sum
-        // in this method, stack will be a single value, that of the total
-        stack[stack.length - 1] += 2 * current
-        // alternate method, stack numbers will need to be summed
-        // stack.push(current * 2)
-      }
-    }
-  }
-  // let sum = 0;
-  // console.log('stack', stack)
-  // stack.forEach((el) => {
-  //   sum += el
-  // })
-  let sum = stack[0]
-  return sum;
+  const first = elements[0];
+  const subsetsWithoutFirst = subsets(elements.slice(1));
+  const subsetsWithFirst = [];
+  for (let sub of subsetsWithoutFirst) {
+    subsetsWithFirst.push([first, ...sub]);
+  };
+  console.log(subsetsWithoutFirst, subsetsWithFirst)
+  return [ ...subsetsWithoutFirst, ...subsetsWithFirst ];
 };
 
-console.log(nestingScore("[[][]]")); // -> 4); // -> 5); // -> 129
+
+console.log(subsets(['a', 'b', 'c'])); // ->
+// [
+//   [],
+//   [ 'c' ],
+//   [ 'b' ],
+//   [ 'b', 'c' ],
+//   [ 'a' ],
+//   [ 'a', 'c' ],
+//   [ 'a', 'b' ],
+//   [ 'a', 'b', 'c' ]
+// ]
