@@ -22,7 +22,7 @@ const createCombinations = (items, k) => {
   // [b, c, d] k(3) -> can only return this one combination whereas
   // [b, c, d] k(2) -> will return all partial combinations of these letters
   const partialCombos = createCombinations(items.slice(1), k - 1)
-  const combosWithFirst = [];
+  const combosWithFirst = []
 
   for (let partialCombo of partialCombos) {
     combosWithFirst.push([ first, ...partialCombo]);
