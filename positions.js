@@ -1,40 +1,49 @@
-const parentheticalPossibilities = (s) => {
-  if (s.length === 0) return [''];
+class Node {
+  constructor(val) {
+    this.val = val
+    this.next = null
 
-  const allPossibilities = [];
-
-  const {choices, remainder} = getChoices(s);
-  console.log('first choices, string:', s, 'choices:', choices, remainder)
-  //a single choice is a character
-  for (let choice of choices) {
-    const remainderPossibilities = parentheticalPossibilities(remainder);
-    for (let substring of remainderPossibilities) {
-      allPossibilities.push(choice + substring)
-    }
-  };
-  console.log('return stmt', allPossibilities)
-  return allPossibilities;
-};
-
-//return one character from parenthesis, and return tail of sentence
-//format it as an object
-const getChoices = (s) => {
-  if (s[0] === '(') {
-    let end = s.indexOf(')') //first index of this character's occurence
-    const choices = s.slice(1, end);
-    const remainder = s.slice(end + 1);
-    return {
-      choices,
-      remainder
-    };
-  } else {
-    return {
-    choices: s[0],
-    remainder: s.slice(1)
-    }
   }
 }
 
+const a = new Node(3);
+const b = new Node(2);
+const c = new Node(7);
+const d = new Node(7);
+const e = new Node(2);
+const f = new Node(3);
 
-console.log(parentheticalPossibilities("(qr)ab(stu)c")); // ->
-// [ 'qabsc', 'qabtc', 'qabuc', 'rabsc', 'rabtc', 'rabuc' ]
+a.next = b;
+b.next = c;
+c.next = d;
+d.next = e;
+e.next = f;
+
+// const a = new Node(3);
+// const b = new Node(2);
+// const c = new Node(4);
+
+// a.next = b;
+// b.next = c;
+
+
+// 3 -> 2 -> 7 -> 7 -> 2 -> 3
+
+const linkedPalindrome = (head) => {
+  const reverse = reverseList(head);
+  const normal = normList(head);
+  console.log(normal, reverse)
+  return normal === reverse
+}
+
+function reverseList(head) {
+  if (head === null) return '';
+  return `${reverseList(head.next)}` + `${head.val}`;
+}
+function normList(head) {
+  if (head === null) return '';
+  return `${head.val}` + `${normList(head.next)}`;
+}
+
+
+console.log(linkedPalindrome(a)); // true
