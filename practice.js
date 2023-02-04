@@ -1,27 +1,28 @@
 const compress = (str) => {
     let res = [];
     let i = 0;
-    let j = 1;
+    let j = 0;
 
-
-    while (j < str.length) {
-
+    while (j <= str.length) {
         if (str[i] !== str[j]) {
-            //different
             let num = j - i;
-            res.push('3', str[i])
+            if (num === 1) {
+                res.push(str[i])
+            } else {
+                console.log(typeof num)
+                res.push(num, str[i])
+            }
             i = j
         } else {
-            //same
+            j++
         }
-        j ++
+
     }
-    return res;
+    return res.join('');
 };
 
 
-
-console.log(compress("nnneeeeeeeeeeeezz"));
+console.log(compress("ssssbbz"));
 
 let arr = []
 arr.push(3, 5)
