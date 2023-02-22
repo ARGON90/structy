@@ -1,20 +1,19 @@
+function generate(numRows) {
 
-
-const maxPair =  (nums) => {
-    let i = 0;
-    let j = 1;
-    let max = -Infinity;
-    let res;
-    while (j < nums.length) {
-        let currentSum = nums[i] + nums[j]
-        if (currentSum > max) {
-            res = [i, j]
-            max = currentSum
+    let res = [[1]]
+    for (let i = 1; i < numRows; i ++) {
+        res[i] = [];
+        let newRow = [];
+        let prevRow = res[i - 1]
+        for (let j = 0; j <= prevRow.length; j++) {
+            let num = 0;
+            if (prevRow[j - 1]) num += prevRow[j - 1]
+            if (prevRow[j]) num += prevRow[j]
+            newRow.push(num)
         }
-        i++;
-        j++
+        res[i] = newRow
     }
     return res;
 }
 
-maxPair([0, 4, 3, 1, 2, 3, 4, 0])
+console.log(generate(5))
