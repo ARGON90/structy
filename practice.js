@@ -13,7 +13,7 @@ function generate(numRows) {
         }
         res[i] = newRow
     }
-    return res;
+    return res
 }
 
 console.log(generate(5))
