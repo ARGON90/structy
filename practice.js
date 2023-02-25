@@ -1,19 +1,37 @@
-function generate(numRows) {
-
-    let res = [[1]]
-    for (let i = 1; i < numRows; i ++) {
-        res[i] = [];
-        let newRow = [];
-        let prevRow = res[i - 1]
-        for (let j = 0; j <= prevRow.length; j++) {
-            let num = 0;
-            if (prevRow[j - 1]) num += prevRow[j - 1]
-            if (prevRow[j]) num += prevRow[j]
-            newRow.push(num)
-        }
-        res[i] = newRow
+const longestPath = (graph) => {
+    let visited = {};
+    let longest = 0;
+    for (let node in graph) {
+        path = explore(graph, node, visited)
+        longest = Math.max(path, longest);
     }
-    return res
+    return Math.max(...Object.values(visited));
+};
+
+function explore(graph, node, visited) {
+    if (node in visited) return visited[node];
+
+    let length = 0;
+
+    for (let neighbor of graph[node]) {
+        size = 1 + explore(graph, neighbor, visited);
+        length = Math.max(size, length)
+    }
+    visited[node] = length;
+    console.log(visited)
+    return visited[node]
 }
 
-console.log(generate(5))
+const graph = {
+    a: ['c', 'b'],
+    b: ['c'],
+    c: [],
+    q: ['r'],
+    r: ['s', 'u', 't'],
+    s: ['t'],
+    t: ['u'],
+    u: []
+};
+
+
+console.log(longestPath(graph)); // -> 2
