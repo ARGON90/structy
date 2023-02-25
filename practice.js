@@ -11,7 +11,7 @@ const longestPath = (graph) => {
 function explore(graph, node, visited) {
     if (node in visited) return visited[node];
 
-    let length = 0;
+    let length = 0
 
     for (let neighbor of graph[node]) {
         size = 1 + explore(graph, neighbor, visited);
