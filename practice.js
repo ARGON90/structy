@@ -6,7 +6,7 @@ const longestPath = (graph) => {
         longest = Math.max(path, longest);
     }
     return Math.max(...Object.values(visited));
-};
+}
 
 function explore(graph, node, visited) {
     if (node in visited) return visited[node];
