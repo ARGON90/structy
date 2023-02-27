@@ -1,5 +1,5 @@
 const longestPath = (graph) => {
-    let visited = {};
+    let visited = {}
     let longest = 0;
     for (let node in graph) {
         path = explore(graph, node, visited)
