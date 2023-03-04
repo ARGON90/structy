@@ -31,7 +31,7 @@ const graph = {
     s: ['t'],
     t: ['u'],
     u: []
-}
+};
 
 
 console.log(longestPath(graph)) // -> 2
