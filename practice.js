@@ -34,4 +34,4 @@ const graph = {
 };
 
 
-console.log(longestPath(graph)) // -> 2
+console.log(longestPath(graph)); // -> 2
