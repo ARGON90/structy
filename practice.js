@@ -1,37 +1,44 @@
-const longestPath = (graph) => {
-    let visited = {}
-    let longest = 0;
-    for (let node in graph) {
-        path = explore(graph, node, visited)
-        longest = Math.max(path, longest);
+function mirror(matrix) {
+
+
+    // Initialize unordered set
+    var set = new Set();
+
+    // Traverse the matrix
+    for (var i = 0; i < matrix.length; i++) {
+        var minr = Infinity;
+        for (var j = 0; j < matrix[i].length; j++) {
+
+            // Update the minimum
+            // element of current row
+            minr = Math.min(minr, matrix[i][j]);
+        }
+
+        // Insert the minimum
+        // element of the row
+        set.add(minr);
     }
-    return Math.max(...Object.values(visited));
-}
 
-function explore(graph, node, visited) {
-    if (node in visited) return visited[node];
+    for (var j = 0; j < matrix[0].length; j++) {
+        var maxc = -Infinity;
 
-    let length = 0
+        for (var i = 0; i < matrix.length; i++) {
 
-    for (let neighbor of graph[node]) {
-        size = 1 + explore(graph, neighbor, visited);
-        length = Math.max(size, length)
+            // Update the maximum
+            // element of current column
+            maxc = Math.max(maxc, matrix[i][j]);
+        }
+
+        // Checking if it is already present
+        // in the unordered_set or not
+        if (set.has(maxc)) {
+            return maxc
+        }
     }
-    visited[node] = length;
-    console.log(visited)
-    return visited[node]
 }
+var mat
+    = [[1, 10, 4],
+    [9, 3, 8],
+    [15, 16, 17]];
 
-const graph = {
-    a: ['c', 'b'],
-    b: ['c'],
-    c: [],
-    q: ['r'],
-    r: ['s', 'u', 't'],
-    s: ['t'],
-    t: ['u'],
-    u: []
-};
-
-
-console.log(longestPath(graph)); // -> 2
+console.log(mirror(mat))
