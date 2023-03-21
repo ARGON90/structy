@@ -5,3 +5,10 @@ const maxValue = (nums) => {
     }
     return max;
 }
+
+const x  = {};
+x.bar = {
+    'first': 100,
+    'second': 200
+}
+console.log(x.bar['first'] + x['bar'].second)
