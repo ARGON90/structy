@@ -1,14 +1,9 @@
-const maxValue = (nums) => {
-    let max = -Infinity;
-    for (let num of nums) {
-        max = Math.max(num, max)
-    }
-    return max;
-}
 
-const x  = {};
-x.bar = {
-    'first': 100,
-    'second': 200
-}
-console.log(x.bar['first'] + x['bar'].second)
+const isPrime = (num) => {
+    if (num === 2) return true;
+    if (num === 1) return false;
+    for (let i = 2; i < num; i ++ ) {
+      if (num % i === 0) return false;
+    }
+    return true;
+  }
