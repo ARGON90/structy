@@ -16,10 +16,10 @@ function sortedPrimes(input_array) {
     }
   }
 
-  return result.sort((a,b) => a - b);
+  return result.sort((a, b) => a - b);
 }
 
-function primeFactors(input_array){
+function primeFactors(input_array) {
   var result = [];
 
   for (num of input_array) {
@@ -39,7 +39,7 @@ function primeFactors(input_array){
   return result
 }
 
-function main(){
+function main() {
   var input = [6, 8, 9];
   var result = sortedPrimes(input);
   console.log(result);
@@ -48,4 +48,4 @@ function main(){
   console.log(result2);
 }
 
-console.log(main())
+console.log(main());
